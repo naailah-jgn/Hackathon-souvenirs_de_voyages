@@ -22,6 +22,9 @@ class Trip
     #[ORM\ManyToOne(inversedBy: 'trips')]
     private ?User $User = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $country_name = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Trip
     public function setUser(?User $User): self
     {
         $this->User = $User;
+
+        return $this;
+    }
+
+    public function getCountryName(): ?string
+    {
+        return $this->country_name;
+    }
+
+    public function setCountryName(string $country_name): self
+    {
+        $this->country_name = $country_name;
 
         return $this;
     }

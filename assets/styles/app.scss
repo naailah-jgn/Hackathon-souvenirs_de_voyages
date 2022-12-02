@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/bootstrap";
+
+body #home {
+    background-image: url('/public/build/image_de_font.png');
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+
+.navbar-color{
+    background-color: #e9ecef;
+}

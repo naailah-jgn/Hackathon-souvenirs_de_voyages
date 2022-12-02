@@ -24,13 +24,13 @@ class Desire
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'desires')]
     private Collection $User;
 
-    #[ORM\ManyToMany(targetEntity: Country::class, mappedBy: 'Desire')]
-    private Collection $countries;
+    #[ORM\Column(length: 255)]
+    private ?string $country_name = null;
+
 
     public function __construct()
     {
         $this->User = new ArrayCollection();
-        $this->countries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -86,30 +86,16 @@ class Desire
         return $this;
     }
 
-    /**
-     * @return Collection<int, Country>
-     */
-    public function getCountries(): Collection
+    public function getCountryName(): ?string
     {
-        return $this->countries;
+        return $this->country_name;
     }
 
-    public function addCountry(Country $country): self
+    public function setCountryName(string $country_name): self
     {
-        if (!$this->countries->contains($country)) {
-            $this->countries->add($country);
-            $country->addDesire($this);
-        }
+        $this->country_name = $country_name;
 
         return $this;
     }
 
-    public function removeCountry(Country $country): self
-    {
-        if ($this->countries->removeElement($country)) {
-            $country->removeDesire($this);
-        }
-
-        return $this;
-    }
 }

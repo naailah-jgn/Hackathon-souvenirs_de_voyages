@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Repository\UserRepository;
 
-class DefaultController extends AbstractController
+class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_index')]
     public function index(UserRepository $userRepository): Response

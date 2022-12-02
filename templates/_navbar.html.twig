@@ -1,61 +1,39 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light navbar-color">
 
 	<div class="container-fluid">
 
-		<div class="nav nav-pills nav-fill col-4">
+		<a class="navbar-brand" href="/">HOME</a>
+
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      		<span class="navbar-toggler-icon"></span>
+    	</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 			<li class="nav-item">
-				<a class="">Welcome
-					{{users[0].firstname}}
-				</a>
+				<a class="nav-link active" aria-current="page">Welcome {{users[0].firstname}}</a>
 			</li>
 
-			<div class="dropdown">
-				<button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-
-				<ul class="dropdown-menu">
-					<li>
-						<a class="dropdown-item" href="#">serie 1</a>
-					</li>
-					<li>
-						<a class="dropdown-item" href="#">serie 1</a>
-					</li>
-				</ul>
-			</div>
-
+			<li class="nav-item">
+				<a class="nav-link active" href="">Mes envies</a>
+			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="#">Acteurs</a>
+				<a class="nav-link active" href="">Mes voyages</a>
 			</li>
+		</ul>
 		</div>
 
-		<div class="col-4 nav justify-content-between align-items-center">
-
-			<div class="dropdown">
-				<button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-					Watchlist
-				</button>
-
-				<ul class="dropdown-menu">
-					<li>
-						<a class="dropdown-item" href="#">serie 1</a>
-					</li>
-					<li>
-						<a class="dropdown-item" href="#">serie 2</a>
-					</li>
-					<li>
-						<a class="dropdown-item" href="#">serie 3</a>
-					</li>
-				</ul>
-			</div>
-
+		<div class="collapse navbar-collapse row" id="navbarSupportedContent">
+		<ul class="navbar-nav justify-content-end">
 			<li class="nav-item">
-				<a class="nav-link" href="#">Inscription</a>
+				<a class="nav-link active" href="">Inscription</a>
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="#">Connexion</a>
+				<a class="nav-link active" href="">Connexion</a>
 			</li>
-
+		</ul>
 		</div>
 
 	</div>
