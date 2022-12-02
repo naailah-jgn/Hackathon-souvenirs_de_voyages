@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Desire;
 use App\Entity\Trip;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Collection;
 
 /**
  * @extends ServiceEntityRepository<Trip>
@@ -37,6 +39,11 @@ class TripRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function selectAllByDesireMatch(Desire $desire): Collection
+    {
+        return $this->findAllByCountryName($desire->getCountryName());
     }
 
 //    /**

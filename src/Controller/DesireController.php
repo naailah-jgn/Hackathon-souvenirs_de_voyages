@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Desire;
 use App\Form\DesireType;
 use App\Repository\DesireRepository;
+use App\Repository\TripRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +24,7 @@ class DesireController extends AbstractController
     }
 
     #[Route('/new', name: 'app_desire_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, DesireRepository $desireRepository): Response
+    public function new(Request $request, DesireRepository $desireRepository, TripRepository $tripRepository): Response
     {
         $desire = new Desire();
         $form = $this->createForm(DesireType::class, $desire);
@@ -32,7 +33,15 @@ class DesireController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $desireRepository->save($desire, true);
 
-            return $this->redirectToRoute('app_desire_index', [], Response::HTTP_SEE_OTHER);
+            $trips = $tripRepository->selectAllByDesireMatch($desire);
+
+            if (empty($trips)) {
+                return $this->redirectToRoute('app_desire_index', [], Response::HTTP_SEE_OTHER);
+            }
+            else {
+                // Redirect vers la page de Naailah (desire/match/desire_id/trip_id)
+            }
+
         }
 
         return $this->render('desire/new.html.twig', [
