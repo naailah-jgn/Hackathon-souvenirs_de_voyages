@@ -9,16 +9,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Repository\UserRepository;
 
-class DefaultController extends AbstractController
+#[Route('/info', name: 'info_')]
+class InfoController extends AbstractController
 {
-    #[Route('/', name: 'app_index')]
+    #[Route('/', name: 'index')]
     public function index(UserRepository $userRepository): Response
     {
         
-        return $this->render('index.html.twig', 
+        return $this->render('info.html.twig', 
         [
-            'user' => $userRepository->findAll()
+            'users' => $userRepository->findAll()
         ]);
         
     }
+
 }
