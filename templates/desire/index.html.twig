@@ -1,37 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Desire index{% endblock %}
+{% block title %}Desire index
+{% endblock %}
 
 {% block body %}
-    <h1>Desire index</h1>
+	<h1>Desire index</h1>
+	<a href="{{ path('app_desire_new') }}">
+		<button type="button" class="btn btn-danger">Créer une nouvelle envie</button>
+	</a>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Budget</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for desire in desires %}
-            <tr>
-                <td>{{ desire.id }}</td>
-                <td>{{ desire.name }}</td>
-                <td>{{ desire.budget }}</td>
-                <td>
-                    <a href="{{ path('app_desire_show', {'id': desire.id}) }}">show</a>
-                    <a href="{{ path('app_desire_edit', {'id': desire.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_desire_new') }}">Create new</a>
-{% endblock %}
+	<table class="table">
+		<thead>
+			<tr class="row justify-content-around mb-5">
+				<th class="col-4">Name</th>
+				<th class="col-4">Budget</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if desire is defined %}
+				{% for desire in desires %}
+					<tr>
+						<td>{{ desire.id }}</td>
+						<td>{{ desire.name }}</td>
+						<td>{{ desire.budget }}</td>
+						<td>
+							<a href="{{ path('app_desire_show', {'id': desire.id}) }}">show</a>
+							<a href="{{ path('app_desire_edit', {'id': desire.id}) }}">edit</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="4">no records found</td>
+					</tr>
+				{% endfor %}
+			{% endif %}
+		</tbody>
+	</tbody>
+</table>{% endblock %}

@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/desire')]
 class DesireController extends AbstractController
 {
-    #[Route('/', name: 'app_desire_index', methods: ['GET'])]
+    #[Route('/', name: 'app_desire_index', methods: ['GET'])]   
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('desire/index.html.twig', [
@@ -35,16 +35,17 @@ class DesireController extends AbstractController
             return $this->redirectToRoute('app_desire_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('desire/new.html.twig', [
+        return $this->render('desire/new.html.twig', [
             'desire' => $desire,
             'form' => $form,
+    
         ]);
     }
 
     #[Route('/{id}', name: 'app_desire_show', methods: ['GET'])]
-    public function show(Desire $desireName, $desireRepository, $userRepository, $user_id): Response
+    public function show(Desire $desireName, DesireRepository $desireRepository): Response
     {
-        $desire= $userRepository->findOneBy(['name'=>$desireName->getId()]);
+        $desire = $desireRepository->getDesires(); //getUsers//
 
         return $this->render('desire/show.html.twig', [
             'desire' => $desire,

@@ -14,8 +14,9 @@ class DesireType extends AbstractType
         $builder
             ->add('name')
             ->add('budget')
-            ->add('User')
-            ->add('countries')
+           /* ->add('User')
+            ->add('countries') */
+
         ;
     }
 
