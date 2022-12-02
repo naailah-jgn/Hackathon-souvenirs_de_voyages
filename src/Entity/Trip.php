@@ -23,7 +23,7 @@ class Trip
     private ?User $User = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $country_name = null;
+    private ?string $countryName = null;
 
     public function getId(): ?int
     {
@@ -68,12 +68,12 @@ class Trip
 
     public function getCountryName(): ?string
     {
-        return $this->country_name;
+        return $this->countryName;
     }
 
-    public function setCountryName(string $country_name): self
+    public function setCountryName(string $countryName): self
     {
-        $this->country_name = $country_name;
+        $this->countryName = $countryName;
 
         return $this;
     }

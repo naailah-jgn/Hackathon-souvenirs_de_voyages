@@ -2,37 +2,38 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Trip;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class Trip extends Fixture
+class TripFixtures extends Fixture
 {
     public const TRIP = [
-        ['description' => 'Cacao',
+        ['description' => 'Description voyage 1',
         'country_name' => 'Madagascar',  
         ],
-        ['description' => 'Cigarre',
+        ['description' => 'Description voyage 2',
         'country_name' => 'Cuba',
         ],
-        ['description' => 'Vin',
+        ['description' => 'Description voyage 3',
         'country_name' => 'France',
         ],
-        ['description' => 'Chapeau',
+        ['description' => 'Description voyage 4',
         'country_name' => 'Mexique',
         ],
-        ['description' => 'Fromage',
+        ['description' => 'Description voyage 5',
         'country_name' => 'France',
         ],
-        ['description' => 'Sangria',
+        ['description' => 'Description voyage 6',
         'country_name' => 'Espagne',
         ],
-        ['description' => 'Datte',
-        'country_name' => 'Maroc', 
+        ['description' => 'Description voyage 7',
+        'country_name' => 'Espagne', 
         ],
-        ['description' => 'Fromage',
+        ['description' => 'Description voyage 8',
         'country_name' => 'Italie',
         ],
-        ['description' => 'Une mini Tour-Eiffel',
+        ['description' => 'Description voyage 9',
         'country_name' => 'France',
         ],
 
@@ -41,15 +42,13 @@ class Trip extends Fixture
     public function load(ObjectManager $manager): void
     {
         foreach (self::TRIP as $tripName){
-            $trip = new Desire();
+            $trip = new Trip();
             $trip->setDescription($tripName['description']);
-            $trip->setCountry_name($tripName ['country_name']);
+            $trip->setCountryName($tripName ['country_name']);
             $manager->persist($trip);
             $manager->flush(); 
         }
-        // $product = new Product();
-        // $manager->persist($product);
-
+        
         $manager->flush();
     }
 }

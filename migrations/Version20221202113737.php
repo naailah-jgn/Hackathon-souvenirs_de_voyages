@@ -22,7 +22,7 @@ final class Version20221202113737 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE desire ADD country_name VARCHAR(255) NOT NULL');
     }
-
+    
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs

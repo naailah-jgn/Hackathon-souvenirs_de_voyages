@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Desire;
+use App\Entity\Trip;
 use App\Form\DesireType;
 use App\Repository\DesireRepository;
 use App\Repository\TripRepository;
@@ -25,7 +26,7 @@ class DesireController extends AbstractController
 
     #[Route('/new', name: 'app_desire_new', methods: ['GET', 'POST'])]
     public function new(Request $request, DesireRepository $desireRepository, TripRepository $tripRepository): Response
-    {
+    {   
         $desire = new Desire();
         $form = $this->createForm(DesireType::class, $desire);
         $form->handleRequest($request);
@@ -43,11 +44,10 @@ class DesireController extends AbstractController
             }
 
         }
-
+        
         return $this->render('desire/new.html.twig', [
             'desire' => $desire,
-            'form' => $form,
-    
+            'form' => $form
         ]);
     }
 
@@ -58,6 +58,15 @@ class DesireController extends AbstractController
 
         return $this->render('desire/show.html.twig', [
             'desire' => $desire,
+        ]);
+    }
+
+    #[Route('/match/{desire}', name: 'app_desire_match', methods: ['GET'])]
+    public function match(Desire $desire, TripRepository $tripRepository): Response
+    {
+        return $this->render('desire/match.html.twig', [
+            'desire' => $desire,
+            'trips'  => $tripRepository->selectAllByDesireMatch($desire)
         ]);
     }
 

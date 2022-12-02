@@ -41,9 +41,9 @@ class TripRepository extends ServiceEntityRepository
         }
     }
 
-    public function selectAllByDesireMatch(Desire $desire): Collection
+    public function selectAllByDesireMatch(Desire $desire): array
     {
-        return $this->findAllByCountryName($desire->getCountryName());
+        return $this->findByCountryName($desire->getCountryName());
     }
 
 //    /**
