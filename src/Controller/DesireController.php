@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/desire')]
 class DesireController extends AbstractController
 {
-    #[Route('/', name: 'app_desire_index', methods: ['GET'])]   
+    #[Route('/', name: 'desire_index', methods: ['GET'])]   
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('desire/index.html.twig', [
@@ -37,7 +37,7 @@ class DesireController extends AbstractController
             $trips = $tripRepository->selectAllByDesireMatch($desire);
 
             if (empty($trips)) {
-                return $this->redirectToRoute('app_desire_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('desire_index', [], Response::HTTP_SEE_OTHER);
             }
             else {
                 // Redirect vers la page de Naailah (desire/match/desire_id/trip_id)
