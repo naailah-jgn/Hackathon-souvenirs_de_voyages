@@ -17,10 +17,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class DesireController extends AbstractController
 {
     #[Route('/', name: 'desire_index', methods: ['GET'])]   
-    public function index(UserRepository $userRepository): Response
+    public function index(DesireRepository $desireRepository): Response
     {
+        $desire = $desireRepository->findAll();
         return $this->render('desire/index.html.twig', [
-            'users' => $userRepository->findAll()
+            'desires' => $desire,
         ]);
     }
 
@@ -52,10 +53,13 @@ class DesireController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_desire_show', methods: ['GET'])]
-    public function show(Desire $desireName, DesireRepository $desireRepository): Response
+    public function show($id, DesireRepository $desireRepository): Response
     {
-        $desire = $desireRepository->getDesires(); //getUsers//
-
+        $desire = $desireRepository->findOneBy(['id' => $id]);
+        if (!$desire) {
+            throw $this->createNotFoundException('The desire does not exist');
+        }
+    
         return $this->render('desire/show.html.twig', [
             'desire' => $desire,
         ]);
@@ -70,7 +74,7 @@ class DesireController extends AbstractController
         ]);
     }
 
-   /*  #[Route('/{id}/edit', name: 'app_desire_edit', methods: ['GET', 'POST'])]
+     #[Route('/{id}/edit', name: 'app_desire_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Desire $desire, DesireRepository $desireRepository): Response
     {
         $form = $this->createForm(DesireType::class, $desire);
@@ -79,10 +83,10 @@ class DesireController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $desireRepository->save($desire, true);
 
-            return $this->redirectToRoute('app_desire_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('desire_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('desire/edit.html.twig', [
+        return $this->render('desire/edit.html.twig', [
             'desire' => $desire,
             'form' => $form,
         ]);
@@ -96,5 +100,5 @@ class DesireController extends AbstractController
         }
 
         return $this->redirectToRoute('app_desire_index', [], Response::HTTP_SEE_OTHER);
-    } */
+    } 
 }

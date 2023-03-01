@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -32,6 +33,9 @@ class User
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Trip::class)]
     private Collection $trips;
+
+    #[ORM\Column]
+    private array $roles = [];
 
     public function __construct()
     {
@@ -152,6 +156,20 @@ class User
     public function __toString()
     {
         return "";
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
 

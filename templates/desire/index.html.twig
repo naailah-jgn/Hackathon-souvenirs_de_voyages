@@ -9,31 +9,36 @@
 		<button type="button" class="btn btn-danger">Créer une nouvelle envie</button>
 	</a>
 
-	<table class="table">
-		<thead>
-			<tr class="row justify-content-around mb-5">
-				<th class="col-4">Name</th>
-				<th class="col-4">Budget</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% if desire is defined %}
-				{% for desire in desires %}
-					<tr>
-						<td>{{ desire.id }}</td>
-						<td>{{ desire.name }}</td>
-						<td>{{ desire.budget }}</td>
-						<td>
-							<a href="{{ path('app_desire_show', {'id': desire.id}) }}">show</a>
-							<a href="{{ path('app_desire_edit', {'id': desire.id}) }}">edit</a>
-						</td>
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="4">no records found</td>
-					</tr>
-				{% endfor %}
-			{% endif %}
-		</tbody>
-	</tbody>
-</table>{% endblock %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 mx-auto">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th class="col-4">Name</th>
+							<th class="col-4">Budget</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% if desires is defined %}
+							{% for desire in desires %}
+								<tr>
+									<td class="col-3">{{ desire.name }}</td>
+									<td class="col-3">{{ desire.budget|format_currency('EUR') }}</td>
+									<td class="col-3">
+										<a href="{{ path('app_desire_show', {'id': desire.id}) }}">show</a>
+										<a href="{{ path('app_desire_edit', {'id': desire.id}) }}">edit</a>
+									</td>
+								</tr>
+							{% endfor %}
+						{% else %}
+							<tr>
+								<td colspan="4">no records found</td>
+							</tr>
+						{% endif %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}
